@@ -1,6 +1,4 @@
-set(MODULE_NAME DEVICE_TIMER)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(device_timer
     main.c
     test_device_timer.c
     ../../test_common/harness/errorHelpers.c
@@ -10,4 +8,8 @@ set(${MODULE_NAME}_SOURCES
     ../../test_common/harness/msvc9.c
 )
 
-include(../CMakeCommon.txt)
+target_link_libraries(device_timer ${OpenCL_LIBRARIES})
+
+add_test(NAME runDeviceTimerTest
+        COMMAND device_timer
+        )

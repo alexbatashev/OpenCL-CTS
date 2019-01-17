@@ -1,6 +1,4 @@
-set(MODULE_NAME NON_UNIFORM_WORK_GROUP)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(non_uniform_work_group
     main.cpp
     test_advanced_2d.cpp
     test_advanced_3d.cpp
@@ -15,6 +13,8 @@ set(${MODULE_NAME}_SOURCES
     ../../test_common/harness/parseParameters.cpp
 )
 
-include(../CMakeCommon.txt)
+target_link_libraries(non_uniform_work_group ${OpenCL_LIBRARIES})
 
-# end of file #
+add_test(NAME NonUniformWorkGroupTest
+        COMMAND non_uniform_work_group
+        )

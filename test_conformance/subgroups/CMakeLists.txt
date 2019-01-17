@@ -1,6 +1,4 @@
-set(MODULE_NAME SUBGROUPS)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(subgroups
     main.cpp
     test_barrier.cpp
     test_queries.cpp
@@ -17,4 +15,8 @@ set(${MODULE_NAME}_SOURCES
     ../../test_common/harness/parseParameters.cpp
 )
 
-include(../CMakeCommon.txt)
+target_link_libraries(subgroups ${OpenCL_LIBRARIES})
+
+add_test(NAME SubgroupsTest
+        COMMAND subgroups
+        )

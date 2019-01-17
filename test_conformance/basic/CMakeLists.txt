@@ -1,6 +1,4 @@
-set(MODULE_NAME BASIC)
-
-set(${MODULE_NAME}_SOURCES
+set(BASIC_SOURCES
     main.c
     test_fpmath_float.c test_fpmath_float2.c test_fpmath_float4.c
     test_intmath_int.c test_intmath_int2.c test_intmath_int4.c
@@ -80,4 +78,10 @@ if(APPLE)
     list(APPEND ${MODULE_NAME}_SOURCES test_queue_priority.c)
 endif(APPLE)
 
-include(../CMakeCommon.txt)
+add_khronos_executable(basic ${BASIC_SOURCES})
+
+target_link_libraries(basic ${OpenCL_LIBRARIES})
+
+add_test(NAME runBasicTest
+        COMMAND basic
+        )

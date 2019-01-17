@@ -1,6 +1,4 @@
-set(MODULE_NAME SVM)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(SVM
     main.cpp
     test_allocate_shared_buffer.cpp
     test_byte_granularity.cpp
@@ -23,4 +21,8 @@ set(${MODULE_NAME}_SOURCES
     ../../test_common/harness/parseParameters.cpp
 )
 
-include(../CMakeCommon.txt)
+target_link_libraries(SVM ${OpenCL_LIBRARIES})
+
+add_test(NAME SVMTest
+        COMMAND SVM
+        )

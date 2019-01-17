@@ -1,6 +1,4 @@
-set(MODULE_NAME WORKGROUPS)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(workgroups
     main.c
     test_wg_all.c
     test_wg_any.c
@@ -23,4 +21,8 @@ set(${MODULE_NAME}_SOURCES
     ../../test_common/harness/parseParameters.cpp
 )
 
-include(../CMakeCommon.txt)
+target_link_libraries(workgroups ${OpenCL_LIBRARIES})
+
+add_test(NAME WorkgroupsTest
+        COMMAND workgroups
+        )

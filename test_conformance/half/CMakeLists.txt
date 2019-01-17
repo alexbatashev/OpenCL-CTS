@@ -1,6 +1,4 @@
-set(MODULE_NAME HALF)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(half
         cl_utils.c
         Test_vLoadHalf.c
         Test_roundTrip.c
@@ -13,5 +11,9 @@ set(${MODULE_NAME}_SOURCES
         ../../test_common/harness/kernelHelpers.c
 )
 
-include(../CMakeCommon.txt)
+target_link_libraries(half ${OpenCL_LIBRARIES})
+
+add_test(NAME runHalfTest
+        COMMAND half
+        )
 

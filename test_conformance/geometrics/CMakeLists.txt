@@ -1,6 +1,4 @@
-set(MODULE_NAME GEOMETRICS)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(geometrics
     main.c
     test_geometrics_double.cpp
     test_geometrics.cpp
@@ -20,5 +18,9 @@ set(CMAKE_C_FLAGS_RELEASE "/Od /Ob0")
 set(CMAKE_CXX_FLAGS_RELEASE "/Od /Ob0")
 endif(MSVC)
 
-include(../CMakeCommon.txt)
+target_link_libraries(geometrics ${OpenCL_LIBRARIES})
+
+add_test(NAME runGeometricsTest
+        COMMAND geometrics
+        )
 

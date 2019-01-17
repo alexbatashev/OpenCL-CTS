@@ -1,6 +1,4 @@
-set(MODULE_NAME COMMONFNS)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(commonfns
     main.c
     test_clamp.c
     test_degrees.c
@@ -29,5 +27,8 @@ set(${MODULE_NAME}_SOURCES
     ../../test_common/harness/msvc9.c
     ../../test_common/harness/parseParameters.cpp
 )
+target_link_libraries(commonfns ${OpenCL_LIBRARIES})
 
-include(../CMakeCommon.txt)
+add_test(NAME runCommonfnsTest
+        COMMAND commonfns
+        )

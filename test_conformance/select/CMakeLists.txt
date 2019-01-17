@@ -1,6 +1,4 @@
-set(MODULE_NAME SELECT)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(select
         test_select.c
         util_select.c
         ../../test_common/harness/testHarness.c
@@ -11,4 +9,8 @@ set(${MODULE_NAME}_SOURCES
         ../../test_common/harness/parseParameters.cpp
 )
 
-include(../CMakeCommon.txt)
+target_link_libraries(select ${OpenCL_LIBRARIES})
+
+add_test(NAME SelectTest
+        COMMAND select
+        )

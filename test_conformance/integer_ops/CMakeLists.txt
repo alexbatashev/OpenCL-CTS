@@ -1,6 +1,4 @@
-set(MODULE_NAME INTEGER_OPS)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(integer_ops
     main.c
     test_int_basic_ops.c
     test_integers.cpp
@@ -22,5 +20,9 @@ set(${MODULE_NAME}_SOURCES
     ../../test_common/harness/parseParameters.cpp
 )
 
-include(../CMakeCommon.txt)
+target_link_libraries(integer_ops ${OpenCL_LIBRARIES})
+
+add_test(NAME runIntegerOpsTest
+        COMMAND integer_ops
+        )
 

@@ -9,7 +9,7 @@ set(CMAKE_C_FLAGS_RELEASE "-O0")
 set(CMAKE_CXX_FLAGS_RELEASE "-O0")
 endif(MSVC)
 
-set (${MODULE_NAME}_SOURCES
+set (CONVERSIONS_SOURCES
       Sleep.c test_conversions.c basic_test_conversions.c
       ../../test_common/harness/ThreadPool.c
       ../../test_common/harness/rounding_mode.c
@@ -25,17 +25,17 @@ if(ANDROID)
     list(APPEND CONVERSIONS_SOURCES fplib.c)
 endif(ANDROID)
 
-if(WIN32)
-set_source_files_properties(
-    ${MODULE_NAME}_SOURCES
-        PROPERTIES LANGUAGE CXX)
-endif(WIN32)
+#if(WIN32)
+#set_source_files_properties(
+#    ${MODULE_NAME}_SOURCES
+#        PROPERTIES LANGUAGE CXX)
+#endif(WIN32)
 
 if(NOT CMAKE_CL_64 AND NOT MSVC AND NOT ANDROID)
 # -march is needed for CPU atomics, default arch on gcc is i386
 # that does not support atomics.
 set_source_files_properties(
-        ${MODULE_NAME}_SOURCES
+        ${CONVERSIONS_SOURCES}
         COMPILE_FLAGS -march=i686)
 endif(NOT CMAKE_CL_64 AND NOT MSVC AND NOT ANDROID)
 
@@ -45,4 +45,10 @@ set_source_files_properties(
         COMPILE_FLAGS -msse2)
 endif(NOT ANDROID)
 
-include(../CMakeCommon.txt)
+add_khronos_executable(conversions ${CONVERSIONS_SOURCES})
+
+target_link_libraries(conversions ${OpenCL_LIBRARIES})
+
+add_test(NAME runConversionsTest
+        COMMAND conversions
+        )

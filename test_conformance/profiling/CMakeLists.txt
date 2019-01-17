@@ -1,6 +1,4 @@
-set(MODULE_NAME PROFILING)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(profiling
     main.c
     readArray.c
     writeArray.c
@@ -20,4 +18,8 @@ set(${MODULE_NAME}_SOURCES
     ../../test_common/harness/parseParameters.cpp
 )
 
-include(../CMakeCommon.txt)
+target_link_libraries(profiling ${OpenCL_LIBRARIES})
+
+add_test(NAME ProfilingTest
+        COMMAND profiling
+        )

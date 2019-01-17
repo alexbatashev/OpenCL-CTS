@@ -1,6 +1,4 @@
-set(MODULE_NAME RELATIONALS)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(relationals
     main.c
     test_relationals.cpp
     test_comparisons_float.cpp
@@ -16,5 +14,9 @@ set(${MODULE_NAME}_SOURCES
     ../../test_common/harness/parseParameters.cpp
 )
 
-include(../CMakeCommon.txt)
+target_link_libraries(relationals ${OpenCL_LIBRARIES})
+
+add_test(NAME RelationalsTest
+        COMMAND relationals
+        )
 

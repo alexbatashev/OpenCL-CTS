@@ -1,6 +1,4 @@
-set(MODULE_NAME DEVICE_PARTITION)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(device_partition
     main.c
     test_device_partition.cpp
     ../../test_common/harness/errorHelpers.c
@@ -14,4 +12,9 @@ set(${MODULE_NAME}_SOURCES
     ../../test_common/harness/msvc9.c
     ../../test_common/harness/parseParameters.cpp
 )
-include(../CMakeCommon.txt)
+
+target_link_libraries(device_partition ${OpenCL_LIBRARIES})
+
+add_test(NAME runDevicePartitionTest
+        COMMAND device_partition
+        )

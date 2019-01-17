@@ -1,6 +1,4 @@
-set(MODULE_NAME GENERIC_ADDRESS_SPACE)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(generic_address_space
     advanced_tests.cpp
     basic_tests.cpp
     main.cpp
@@ -13,6 +11,9 @@ set(${MODULE_NAME}_SOURCES
     ../../test_common/harness/parseParameters.cpp
 )
 
-include(../CMakeCommon.txt)
+target_link_libraries(generic_address_space ${OpenCL_LIBRARIES})
 
-# end of file #
+add_test(NAME GenericAddressSpaceTest
+        COMMAND generic_address_space
+        )
+

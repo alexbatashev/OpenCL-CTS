@@ -1,6 +1,4 @@
-set(MODULE_NAME EVENTS)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(events
     main.c
     test_events.cpp
     test_event_dependencies.cpp
@@ -22,4 +20,8 @@ set(${MODULE_NAME}_SOURCES
     ../../test_common/harness/parseParameters.cpp
 )
 
-include(../CMakeCommon.txt)
+target_link_libraries(events ${OpenCL_LIBRARIES})
+
+add_test(NAME runEventsTest
+        COMMAND events
+        )

@@ -1,6 +1,4 @@
-set(MODULE_NAME THREAD_DIMENSIONS)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(thread_dimensions
         main.c
     test_thread_dimensions.c
     ../../test_common/harness/errorHelpers.c
@@ -14,7 +12,14 @@ set(${MODULE_NAME}_SOURCES
     ../../test_common/harness/parseParameters.cpp
 )
 
-set_source_files_properties(
-        COMPILE_FLAGS -msse2)
+if(MSVC)
+    target_compile_options(thread_dimensions PUBLIC "/arch:SSE2")
+else()
+    target_compile_options(thread_dimensions PUBLIC "-msse2")
+endif()
 
-include(../CMakeCommon.txt)
+target_link_libraries(thread_dimensions ${OpenCL_LIBRARIES})
+
+add_test(NAME ThreadDimensionsTest
+        COMMAND thread_dimensions
+        )

@@ -1,6 +1,4 @@
-set(MODULE_NAME computeinfo)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(computeinfo
         main.c
         ../../test_common/harness/errorHelpers.c
         ../../test_common/harness/msvc9.c
@@ -9,4 +7,8 @@ set(${MODULE_NAME}_SOURCES
         ../../test_common/harness/testHarness.c
 )
 
-include(../CMakeCommon.txt)
+target_link_libraries(computeinfo ${OpenCL_LIBRARIES})
+
+add_test(NAME runComputeinfoTest
+        COMMAND computeinfo
+        )

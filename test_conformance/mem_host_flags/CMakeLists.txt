@@ -1,6 +1,4 @@
-set(MODULE_NAME MEM_HOST_FLAGS)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(mem_host_flags
     main.cpp
     mem_host_buffer.cpp
     mem_host_image.cpp
@@ -17,4 +15,8 @@ set(${MODULE_NAME}_SOURCES
     ../../test_common/harness/parseParameters.cpp
 )
 
-include(../CMakeCommon.txt)
+target_link_libraries(mem_host_flags ${OpenCL_LIBRARIES})
+
+add_test(NAME MemHostFlagsTest
+        COMMAND mem_host_flags
+        )

@@ -1,0 +1,5 @@
+function(add_khronos_executable target_name)
+    set(source_list ${ARGN})
+    set_source_files_properties(${source_list} PROPERTIES LANGUAGE CXX)
+    add_executable(${target_name} ${source_list})
+endfunction(add_khronos_executable)

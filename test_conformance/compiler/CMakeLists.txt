@@ -1,6 +1,4 @@
-set(MODULE_NAME COMPILER)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(compiler
     main.c
     test_build_helpers.c
     test_compile.c
@@ -22,4 +20,8 @@ set(${MODULE_NAME}_SOURCES
     ../../test_common/harness/parseParameters.cpp
 )
 
-include(../CMakeCommon.txt)
+target_link_libraries(compiler ${OpenCL_LIBRARIES})
+
+add_test(NAME runCompilerTest
+        COMMAND compiler
+        )

@@ -1,6 +1,4 @@
-set(MODULE_NAME VECSTEP)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(vec_step
     globals.c
         test_step.c
         main.c
@@ -14,7 +12,14 @@ set(${MODULE_NAME}_SOURCES
         ../../test_common/harness/parseParameters.cpp
 )
 
-set_source_files_properties(
-        COMPILE_FLAGS -msse2)
+if(MSVC)
+    target_compile_options(thread_dimensions PUBLIC "/arch:SSE2")
+else()
+    target_compile_options(thread_dimensions PUBLIC "-msse2")
+endif()
 
-include(../CMakeCommon.txt)
+target_link_libraries(vec_step ${OpenCL_LIBRARIES})
+
+add_test(NAME VecStepTest
+        COMMAND vec_step
+        )

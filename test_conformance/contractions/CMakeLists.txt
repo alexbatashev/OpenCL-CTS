@@ -1,6 +1,4 @@
-set(MODULE_NAME CONTRACTIONS)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(contractions
         contractions.c
         ../../test_common/harness/mt19937.c
         ../../test_common/harness/msvc9.c
@@ -12,4 +10,8 @@ set(${MODULE_NAME}_SOURCES
         ../../test_common/harness/parseParameters.cpp
 )
 
-include(../CMakeCommon.txt)
+target_link_libraries(contractions ${OpenCL_LIBRARIES})
+
+add_test(NAME runContractionsTest
+        COMMAND contractions
+        )

@@ -1,6 +1,4 @@
-set(MODULE_NAME PRINTF)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(printf
          test_printf.c
          util_printf.c
          ../../test_common/harness/errorHelpers.c
@@ -15,4 +13,8 @@ set(${MODULE_NAME}_SOURCES
          ../../test_common/harness/kernelHelpers.c
          )
 
-include(../CMakeCommon.txt)
+target_link_libraries(printf ${OpenCL_LIBRARIES})
+
+add_test(NAME PrintfTest
+        COMMAND printf
+        )

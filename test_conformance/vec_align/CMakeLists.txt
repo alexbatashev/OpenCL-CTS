@@ -1,6 +1,4 @@
-set(MODULE_NAME VECALIGN)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(vec_align
     globals.c
         main.c
         structs.c
@@ -18,5 +16,15 @@ set(${MODULE_NAME}_SOURCES
 set_source_files_properties(
         COMPILE_FLAGS -msse2)
 
-include(../CMakeCommon.txt)
+if(MSVC)
+    target_compile_options(vec_align PUBLIC "/arch:SSE2")
+else()
+    target_compile_options(vec_align PUBLIC "-msse2")
+endif()
+
+target_link_libraries(vec_align ${OpenCL_LIBRARIES})
+
+add_test(NAME VecAlignTest
+        COMMAND vec_align
+        )
 

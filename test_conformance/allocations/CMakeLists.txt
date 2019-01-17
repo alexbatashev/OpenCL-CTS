@@ -1,6 +1,4 @@
-set(MODULE_NAME ALLOCATIONS)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(allocations
         main.cpp
         allocation_execute.cpp
         allocation_fill.cpp
@@ -14,6 +12,10 @@ set(${MODULE_NAME}_SOURCES
         ../../test_common/harness/mt19937.c
         ../../test_common/harness/msvc9.c
         ../../test_common/harness/parseParameters.cpp
-)
+        )
 
-include(../CMakeCommon.txt)
+target_link_libraries(allocations ${OpenCL_LIBRARIES})
+
+add_test(NAME runAllocationsTest
+         COMMAND allocations all
+)

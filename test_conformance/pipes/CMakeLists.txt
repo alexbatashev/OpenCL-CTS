@@ -1,6 +1,4 @@
-set(MODULE_NAME pipes)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(pipes
     main.c
     test_pipe_read_write.c
     test_pipe_info.c
@@ -19,4 +17,8 @@ set(${MODULE_NAME}_SOURCES
     ../../test_common/harness/parseParameters.cpp
 )
 
-include(../CMakeCommon.txt)
+target_link_libraries(pipes ${OpenCL_LIBRARIES})
+
+add_test(NAME PipesTest
+        COMMAND pipes
+        )

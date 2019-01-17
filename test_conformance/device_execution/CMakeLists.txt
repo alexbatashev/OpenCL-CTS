@@ -1,6 +1,4 @@
-set(MODULE_NAME DEVICE_EXECUTION)
-
-set(DEVICE_EXECUTION_SOURCES
+add_khronos_executable(device_execution
     device_info.cpp
     device_queue.cpp
     enqueue_block.cpp
@@ -22,6 +20,8 @@ set(DEVICE_EXECUTION_SOURCES
     ../../test_common/harness/parseParameters.cpp
 )
 
-include(../CMakeCommon.txt)
+target_link_libraries(device_execution ${OpenCL_LIBRARIES})
 
-# end of file #
+add_test(NAME runDeviceExecutionTest
+        COMMAND device_execution all
+        )

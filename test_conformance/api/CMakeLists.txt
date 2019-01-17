@@ -1,6 +1,4 @@
-set(MODULE_NAME API)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(api
          main.c
          test_bool.c
          test_retain.cpp
@@ -36,4 +34,8 @@ set(${MODULE_NAME}_SOURCES
          ../../test_common/harness/parseParameters.cpp
 )
 
-include(../CMakeCommon.txt)
+target_link_libraries(api ${OpenCL_LIBRARIES})
+
+add_test(NAME runApiTest
+        COMMAND api
+        )

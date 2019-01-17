@@ -1,6 +1,4 @@
-set(MODULE_NAME BUFFERS)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(buffers
     main.c
     test_buffer_copy.c
     test_buffer_read.c
@@ -23,4 +21,9 @@ set(${MODULE_NAME}_SOURCES
     ../../test_common/harness/parseParameters.cpp
 )
 
-include(../CMakeCommon.txt)
+target_link_libraries(buffers ${OpenCL_LIBRARIES})
+
+add_test(NAME runBuffersTest
+        COMMAND buffers
+        )
+

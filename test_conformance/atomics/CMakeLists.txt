@@ -1,6 +1,4 @@
-set(MODULE_NAME ATOMICS)
-
-set(${MODULE_NAME}_SOURCES
+add_khronos_executable(atomics
         main.c
         test_atomics.cpp
         test_indexed_cases.c
@@ -14,5 +12,9 @@ set(${MODULE_NAME}_SOURCES
         ../../test_common/harness/parseParameters.cpp
 )
 
-include(../CMakeCommon.txt)
+target_link_libraries(atomics ${OpenCL_LIBRARIES})
+
+add_test(NAME runAtomicsTest
+        COMMAND atomics all
+        )
 
